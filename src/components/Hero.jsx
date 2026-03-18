@@ -107,7 +107,7 @@ const Hero = () => {
               cursor: 'pointer',
               border: '1px solid rgba(255,255,255,0.1)'
             }}>
-              INDICADORES VMC <TrendingUp size={20} color="var(--vmc-yellow)" />
+              INDICADORES <TrendingUp size={20} color="var(--vmc-yellow)" />
             </btn>
           </div>
         </div>

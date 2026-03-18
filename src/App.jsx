@@ -6,12 +6,14 @@ import IndicatorCard from './components/IndicatorCard';
 import SelicCard from './components/SelicCard';
 import NewsFeed from './components/NewsFeed';
 import Newsletter from './components/Newsletter';
-import { fetchIndicators, fetchSelicData, fetchNews } from './services/dataService';
+import IndicatorChart from './components/IndicatorChart';
+import { fetchIndicators, fetchSelicData, fetchNews, fetchHistoricalData } from './services/dataService';
 
 function App() {
   const [indicators, setIndicators] = useState([]);
   const [selic, setSelic] = useState(null);
   const [news, setNews] = useState([]);
+  const [historicalData, setHistoricalData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('vmc-theme') || 'dark';
@@ -29,15 +31,17 @@ function App() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [indicatorsData, selicData, newsData] = await Promise.all([
+        const [indicatorsData, selicData, newsData, history] = await Promise.all([
           fetchIndicators(),
           fetchSelicData(),
-          fetchNews()
+          fetchNews(),
+          fetchHistoricalData()
         ]);
         
         setIndicators(indicatorsData);
         setSelic(selicData);
         setNews(newsData);
+        setHistoricalData(history);
       } catch (error) {
         console.error('Error loading dashboard data:', error);
       } finally {
@@ -68,7 +72,7 @@ function App() {
       <Hero />
       <Ticker indicators={indicators} />
       
-      <main className="container" style={{ paddingTop: '60px' }}>
+      <main id="dashboard-main" className="container" style={{ paddingTop: '60px' }}>
         <div style={{ marginBottom: '40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
             <span style={{ fontSize: '12px', fontWeight: '800', color: 'var(--vmc-red)', textTransform: 'uppercase', letterSpacing: '2px' }}>Painel Económico</span>
@@ -92,6 +96,7 @@ function App() {
           ))}
         </div>
 
+        <IndicatorChart data={historicalData} />
         <Newsletter />
         <NewsFeed news={news} />
         

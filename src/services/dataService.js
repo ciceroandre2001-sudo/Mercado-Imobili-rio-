@@ -34,6 +34,18 @@ export const fetchIndicators = async () => {
     };
   };
   
+  export const fetchHistoricalData = async () => {
+    // Simulated historical data for the last 6 months
+    return [
+      { month: 'Out', incc: 0.32, ipca: 0.28, igpm: -0.10 },
+      { month: 'Nov', incc: 0.45, ipca: 0.52, igpm: 0.15 },
+      { month: 'Dez', incc: 0.38, ipca: 0.48, igpm: 0.32 },
+      { month: 'Jan', incc: 0.40, ipca: 0.42, igpm: 0.05 },
+      { month: 'Fev', incc: 0.48, ipca: 0.55, igpm: -0.15 },
+      { month: 'Mar', incc: 0.45, ipca: 0.42, igpm: -0.15 },
+    ];
+  };
+  
   export const fetchNews = async () => {
     return [
       {
@@ -88,7 +100,7 @@ export const fetchIndicators = async () => {
         source: 'Logística & Infra',
         date: '13 Mar 2026',
         category: 'Logística',
-        thumbnail: 'https://images.unsplash.com/photo-1506306560410-910e9603f90e?q=80&w=600&h=400&auto=format&fit=crop'
+        thumbnail: 'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=600&h=400&auto=format&fit=crop'
       }
     ];
   };

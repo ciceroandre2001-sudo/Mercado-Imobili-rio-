@@ -67,7 +67,12 @@ const Hero = () => {
 
           <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
             <button 
-              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+              onClick={() => {
+                const target = document.getElementById('dashboard-main');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
               style={{ 
                 backgroundColor: 'var(--vmc-red)', 
                 color: 'white', 
@@ -80,35 +85,63 @@ const Hero = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 10px 20px rgba(227, 6, 19, 0.3)'
+                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                boxShadow: '0 10px 20px rgba(227, 6, 19, 0.3)',
+                transform: 'scale(1)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)';
                 e.currentTarget.style.boxShadow = '0 15px 30px rgba(227, 6, 19, 0.4)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
                 e.currentTarget.style.boxShadow = '0 10px 20px rgba(227, 6, 19, 0.3)';
+              }}
+              onMouseDown={(e) => {
+                e.currentTarget.style.transform = 'scale(0.96)';
+              }}
+              onMouseUp={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)';
               }}
             >
               EXPLORAR DASHBOARD <ArrowUpRight size={20} />
             </button>
             
-            <btn className="glass" style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '12px', 
-              padding: '18px 36px', 
-              borderRadius: '12px', 
-              fontSize: '16px', 
-              fontWeight: '700', 
-              color: 'white',
-              cursor: 'pointer',
-              border: '1px solid rgba(255,255,255,0.1)'
-            }}>
+            <button 
+              className="glass"
+              onClick={() => {
+                const target = document.getElementById('chart-section');
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '12px', 
+                padding: '18px 36px', 
+                borderRadius: '12px', 
+                fontSize: '16px', 
+                fontWeight: '700', 
+                color: 'white',
+                cursor: 'pointer',
+                border: '1px solid rgba(255,255,255,0.1)',
+                transition: 'all 0.2s ease',
+                backgroundColor: 'transparent'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.05)';
+                e.currentTarget.style.borderColor = 'rgba(255,237,0,0.3)';
+                e.currentTarget.style.transform = 'translateY(-4px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
               INDICADORES <TrendingUp size={20} color="var(--vmc-yellow)" />
-            </btn>
+            </button>
           </div>
         </div>
       </div>
